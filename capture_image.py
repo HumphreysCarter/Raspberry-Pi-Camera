@@ -9,7 +9,8 @@ from time import sleep
 outputDir = '/home/pi/send2web/'
 
 # Get today's date at midnight
-today=datetime.combine(date.today(), datetime.min.time())
+now = datetime.now()
+today=datetime.combine(now.today(), datetime.min.time())
 
 # Configure ephem observer
 o = ephem.Observer()  
@@ -20,7 +21,6 @@ sunrise = ephem.localtime(o.next_rising(ephem.Sun()))
 sunset = ephem.localtime(o.next_setting(ephem.Sun()))
 
 # Check if image to be captured
-now = datetime.now()
 captureImage = False
 if now >= sunrise-timedelta(hours=1) and now <= sunset+timedelta(hours=1):
     captureImage = True
